@@ -2,10 +2,6 @@
 <style>
 *{box-sizing:border-box}body{margin:0;background:#07111e;color:#fff;font-family:Arial,sans-serif}.head{background:#0b1a30;padding:15px;position:sticky;top:0;z-index:5}.bar{max-width:1200px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}.logo{font-size:23px;font-weight:900}.logo b{color:#00d285}.nav button,.admin{border:0;padding:10px 14px;border-radius:8px;background:transparent;color:#b9c4d3;font-weight:bold;cursor:pointer}.nav button.active,.nav button:hover{background:#00d285;color:#000}.admin{background:#3182ce;color:#fff}.logout{background:#e53e3e;color:#fff}.page{display:none;max-width:1200px;margin:auto;padding:25px 18px}.page.active{display:block}.hero{background:linear-gradient(135deg,#0d3156,#0b1a30);padding:35px 25px;border-radius:18px;margin-bottom:20px}.hero small{color:#00d285;font-weight:bold;letter-spacing:2px}.hero h1{font-size:clamp(32px,6vw,60px);margin:8px 0}.hero p{color:#cbd5e1;line-height:1.5}.cards,.news,.matches,.squads{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.card,.newsCard,.match,.squad{background:#122540;border-radius:14px;padding:18px}.newsCard{border:1px solid #24496e}.newsIcon{font-size:42px}.dim{color:#a0aec0;font-size:13px}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.tabs button{padding:8px 14px;background:#122540;color:#a0aec0;border:1px solid #2a4365;border-radius:7px;font-weight:bold}.tabs button.active{background:#00d285;color:#000}.search{width:240px;padding:11px;border-radius:20px;border:1px solid #2a4365;background:#122540;color:#fff;margin-bottom:12px}.table{background:#122540;border-radius:10px;overflow:auto}table{width:100%;border-collapse:collapse}th,td{padding:14px 17px;border-bottom:1px solid #1a365d;text-align:left}th{background:#081526;color:#a0aec0;font-size:12px;text-transform:uppercase}.rank{color:#00d285;font-weight:bold}.teams{display:flex;justify-content:space-between;align-items:center;text-align:center;margin:20px 0}.team{font-weight:bold;width:43%}.meta{font-size:13px;color:#cbd5e1;display:grid;gap:8px}.badge{color:#00d285;background:#063b30;border-radius:20px;padding:5px 9px;font-size:11px;font-weight:bold}.adminPanel{background:#081a2e;border:1px solid #294d70;border-radius:15px;padding:20px}.form{display:grid;grid-template-columns:1fr 1fr;gap:10px}.form label{font-size:12px;color:#cbd5e1}.form input,.form textarea{width:100%;padding:11px;margin-top:5px;background:#102847;color:#fff;border:1px solid #34516f;border-radius:8px}.full{grid-column:1/-1}.btn{border:0;border-radius:8px;padding:10px 14px;font-weight:bold;margin-top:10px}.btn.blue{background:#3182ce;color:#fff}.btn.gray{background:#334155;color:#fff}.green{background:#00d285;color:#000}.red{background:#fee2e2;color:#991b1b}.row{background:#102847;padding:10px;border-radius:8px;margin-top:7px;display:flex;justify-content:space-between;gap:8px;align-items:center}.login{position:fixed;inset:0;background:#06162b;z-index:99;display:none;align-items:center;justify-content:center;padding:20px}.loginBox{background:#fff;color:#172033;padding:28px;border-radius:18px;width:min(400px,100%)}.loginBox input{width:100%;padding:13px;margin:12px 0;border:1px solid #ccd5df;border-radius:8px}.loginBox button{width:100%;padding:13px;background:#0d3b73;color:#fff;border:0;border-radius:8px;font-weight:bold}.err{color:#d00;font-size:13px;height:18px}@media(max-width:800px){.cards,.news,.matches,.squads{grid-template-columns:1fr}.form{grid-template-columns:1fr}.full{grid-column:auto}}
 </style>
-<style id="cloud-sync-style">
-#cloudStatus{position:fixed;right:12px;bottom:12px;z-index:80;padding:8px 12px;border-radius:999px;font:700 12px Arial;background:#334155;color:#fff;box-shadow:0 5px 18px rgba(0,0,0,.15)}
-#cloudStatus.ok{background:#087f5b}#cloudStatus.busy{background:#2563eb}#cloudStatus.err{background:#b91c1c;color:#fff}#cloudStatus.local{background:#64748b}
-</style>
 <style id="icc-official-style">
 .icc-official-brand{display:flex;align-items:center;gap:10px}
 .icc-official-mark{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;
@@ -99,14 +95,15 @@ padding:22px;overflow:auto;box-shadow:-10px 0 35px rgba(0,0,0,.18)}
 .v6-admin-box input{width:100%;box-sizing:border-box;margin:7px 0;padding:10px;border:1px solid var(--site-border);border-radius:9px;background:var(--site-card);color:var(--site-text)}
 .v6-action{border:0;border-radius:9px;padding:9px 13px;font-weight:800;cursor:pointer;background:#061a4f;color:#fff}
 .v6-note{font-size:12px;color:var(--site-muted);line-height:1.5}
+.cloud-online{color:#16a34a!important}.cloud-offline{color:#dc2626!important}.cloud-saving{color:#2563eb!important}#cloud .btn{margin:6px 5px 0 0}
 </style>
 
-</head><body><div id="cloudStatus" class="busy">☁ Cloud: connecting...</div>
+</head><body>
 
 
 
 <div id="login" class="login"><div class="loginBox"><h2>🔐 Admin Login</h2><p>Only the administrator can edit this website.</p><input id="pass" type="password" placeholder="Admin password"><div id="err" class="err"></div><button onclick="doLogin()">Login</button></div></div>
-<header class="head"><div class="bar"><div class="logo">CRICKET<b>WORLD</b></div><div class="nav"><button class="active" onclick="page('home',this)">Home</button><button onclick="page('tournament',this)">Tournament</button><button onclick="page('rankings',this)">Rankings</button><button onclick="page('records',this)">Records</button></div><div><button id="adminBtn" class="admin" onclick="openLogin()">Admin Login</button><button id="logoutBtn" class="admin logout" style="display:none" onclick="logout()">Logout</button> </div></div></header>
+<header class="head"><div class="bar"><div class="logo">CRICKET<b>WORLD</b></div><div class="nav"><button class="active" onclick="page('home',this)">Home</button><button onclick="page('tournament',this)">Tournament</button><button onclick="page('rankings',this)">Rankings</button><button onclick="page('records',this)">Records</button><button onclick="page('cloud',this)">☁ Cloud</button></div><div><button id="adminBtn" class="admin" onclick="openLogin()">Admin Login</button><button id="logoutBtn" class="admin logout" style="display:none" onclick="logout()">Logout</button> </div></div></header>
 
 <section id="home" class="page active"><div class="hero"><small>ICC OFFICIAL</small><h1 id="homeTitle"></h1><p id="homeIntro"></p></div><div class="cards"><div class="card"><span class="dim">Featured Tournament</span><h3 id="homeTour"></h3></div><div class="card"><span class="dim">Rankings</span><h3>Teams • Batters • Bowlers</h3></div><div class="card"><span class="dim">Private Admin</span><h3>Password Protected</h3></div></div><h2>Latest News</h2><div id="news" class="news"></div></section>
 
@@ -118,6 +115,8 @@ padding:22px;overflow:auto;box-shadow:-10px 0 35px rgba(0,0,0,.18)}
 <h2>Squads</h2><div id="squads" class="squads"></div></section>
 
 <section id="rankings" class="page"><div class="hero"><small>WORLD RANKINGS</small><h1>Rankings Dashboard</h1><p>Teams, batters, bowlers and all-rounders.</p></div><input id="search" class="search" placeholder="Search..." oninput="filter()"><div class="tabs" id="cats"><button class="active" onclick="cat('teams',this)">Teams</button><button onclick="cat('batters',this)">Batters</button><button onclick="cat('bowlers',this)">Bowlers</button><button onclick="cat('allrounders',this)">All-Rounders</button></div><div class="tabs" id="formats"><button class="active" onclick="fmt('TEST',this)">TEST</button><button onclick="fmt('ODI',this)">ODI</button><button onclick="fmt('T20I',this)">T20I</button></div><div class="table"><table><thead><tr id="th"></tr></thead><tbody id="tb"></tbody></table></div></section>
+
+<section id="cloud" class="page"><div class="hero"><small>CLOUD SYNC</small><h1>☁ Cloud Sync</h1><p>JSONBin cloud storage for your cricket portal data.</p></div><div class="cards"><div class="card"><span class="dim">Status</span><h3 id="cloudStatus">Checking...</h3><p id="cloudMessage" class="dim">Connecting to cloud...</p></div><div class="card"><span class="dim">Bin</span><h3>Connected Bin</h3><p class="dim" style="word-break:break-all">6ab028ccac6210605ae36c5b</p></div><div class="card"><span class="dim">Actions</span><button class="btn blue" onclick="cloudSyncNow()">☁ Sync Now</button><button class="btn green" onclick="cloudUploadNow()">↑ Upload</button><button class="btn gray" onclick="cloudDownloadNow()">↓ Download</button><button class="btn gray" onclick="cloudTestNow()">🔎 Test Connection</button></div><div class="card"><span class="dim">Important</span><p class="dim">JSONBin creates two values for an Access Key: <b>accessKey</b> and <b>accessKeyId</b>. This website must use the actual <b>accessKey</b>, not the Access Key ID. If Test Connection says the key is invalid or the Bin does not belong to the account, copy the value labelled <b>Access Key</b> from JSONBin API Keys.</p></div></div></section>
 
 <section id="records" class="page"><div class="hero"><small>CRICKET RECORDS</small><h1>Records & Stats</h1><p>Runs, wickets, centuries, bowling figures and other cricket records. Admin can add, edit or remove records.</p></div><div class="tabs" id="recordFormats"><button class="active" onclick="recordFmt('ALL',this)">ALL</button><button onclick="recordFmt('TEST',this)">TEST</button><button onclick="recordFmt('ODI',this)">ODI</button><button onclick="recordFmt('T20I',this)">T20I</button></div><div class="tabs" id="recordCats"><button class="active" onclick="recordCat('Batting',this)">Batting</button><button onclick="recordCat('Bowling',this)">Bowling</button><button onclick="recordCat('Fielding',this)">Fielding</button><button onclick="recordCat('Team',this)">Team</button><button onclick="recordCat('Other',this)">Other</button></div><div id="recordsGrid" class="cards"></div></section><section id="admin" class="page"><div class="adminPanel"><h2>⚙ Admin Panel</h2><p class="dim">Only you can access this section after entering the password.</p>
 <h3>Home</h3><div class="form"><label>Title<input id="etitle"></label><label>Featured Tournament<input id="etour"></label><label class="full">Introduction<textarea id="eintro" rows="2"></textarea></label></div><button class="btn green" onclick="saveHome()">Save Home</button>
@@ -190,47 +189,24 @@ T20I:[
 ["Hardik Pandya","IND","240"],["Wanindu Hasaranga","SL","230"],["Marcus Stoinis","AUS","225"],["Sikandar Raza","ZIM","210"],["Shakib Al Hasan","BAN","205"],["Mohammad Nabi","AFG","198"],["Liam Livingstone","ENG","185"],["Dipendra Singh Airee","NEP","175"],["Aiden Markram","SA","165"],["Moeen Ali","ENG","160"]]
 }};
 const defaults={home:{title:"World ICC OFFICIAL",intro:"Latest tournament news, fixtures, squads, venues and rankings — all in one place.",tour:"ICC Style World Cricket Cup"},tour:{name:"ICC Style World Cricket Cup",edition:"2026",desc:"Tournament fixtures, venues, match times and squads."},matches:[{t1:"Pakistan",t2:"India",time:"2026-10-10T19:30",venue:"Gaddafi Stadium, Lahore",round:"Match 1 • Group Stage"},{t1:"Australia",t2:"England",time:"2026-10-11T15:00",venue:"Melbourne Cricket Ground",round:"Match 2 • Group Stage"},{t1:"South Africa",t2:"New Zealand",time:"2026-10-12T18:30",venue:"Newlands, Cape Town",round:"Match 3 • Group Stage"}],squads:[{team:"Pakistan",players:["Babar Azam","Mohammad Rizwan","Shaheen Afridi","Naseem Shah"]},{team:"India",players:["Rohit Sharma","Virat Kohli","Jasprit Bumrah","Rishabh Pant"]},{team:"Australia",players:["Pat Cummins","Mitchell Starc","Steve Smith","Travis Head"]}],news:[{title:"Tournament Hub Is Live",date:"18 Sep 2026",text:"Fixtures, squads and venues are available in the tournament centre.",icon:"🏏"},{title:"World Rankings",date:"18 Sep 2026",text:"Check team and player rankings across all formats.",icon:"🏆"}]};
-const JSONBIN_ID="6ab02342ac6210605ae35f34";
-const JSONBIN_KEY="6ab02296ffd5d160531cf209";
-const JSONBIN_URL=`https://api.jsonbin.io/v3/b/${JSONBIN_ID}`;
-let cloudTimer=null,cloudBusy=false,cloudLoaded=false;
-function setCloudStatus(text,cls){const el=$("cloudStatus");if(el){el.textContent=text;el.className=cls||""}}
-function localData(){try{return JSON.parse(localStorage.getItem("cricketPortalData")||"null")}catch(e){return null}}
-let data=localData()||JSON.parse(JSON.stringify(defaults));
+let data=JSON.parse(localStorage.getItem("cricketPortalData")||"null")||JSON.parse(JSON.stringify(defaults));
 data.pointsTable=data.pointsTable||[]; data.pointGroups=data.pointGroups||[{name:"Main Group",teams:[]}]; data.records=data.records||[{category:"Batting",format:"TEST",title:"Most Runs",holder:"Sachin Tendulkar",team:"India",value:"15,921 runs",detail:"Test career"},{category:"Bowling",format:"TEST",title:"Most Wickets",holder:"Muttiah Muralitharan",team:"Sri Lanka",value:"800 wickets",detail:"Test career"},{category:"Batting",format:"ODI",title:"Most Runs",holder:"Sachin Tendulkar",team:"India",value:"18,426 runs",detail:"ODI career"},{category:"Bowling",format:"ODI",title:"Most Wickets",holder:"Muttiah Muralitharan",team:"Sri Lanka",value:"534 wickets",detail:"ODI career"},{category:"Batting",format:"T20I",title:"Most Runs",holder:"Virat Kohli",team:"India",value:"4,188 runs",detail:"T20I career"},{category:"Bowling",format:"T20I",title:"Most Wickets",holder:"Tim Southee",team:"New Zealand",value:"164 wickets",detail:"T20I career"}];
 let admin=false,category="teams",format="TEST",editingMatch=-1,recordFormat="ALL",recordCategory="Batting",editingRecord=-1;
 const $=x=>document.getElementById(x),esc=x=>String(x??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-function save(){localStorage.setItem("cricketPortalData",JSON.stringify(data));render();scheduleCloudSave()}
-function cloudPayload(){return {data,rankings,updatedAt:new Date().toISOString(),source:"ICC Cricket Portal"}}
-async function cloudSave(){
-  if(cloudBusy)return; cloudBusy=true; setCloudStatus("☁ Cloud: saving...","busy");
-  try{
-    const r=await fetch(JSONBIN_URL,{method:"PUT",headers:{"Content-Type":"application/json","X-Access-Key":JSONBIN_KEY,"X-Bin-Versioning":"true"},body:JSON.stringify(cloudPayload())});
-    if(!r.ok){let msg="HTTP "+r.status;try{const j=await r.json();msg=j.message||msg}catch(e){};throw new Error(msg)}
-    setCloudStatus("☁ Cloud: connected","ok");
-  }catch(e){console.error("JSONBin save:",e);setCloudStatus("☁ Cloud: error","err");}
-  finally{cloudBusy=false}
-}
-function scheduleCloudSave(){clearTimeout(cloudTimer);cloudTimer=setTimeout(cloudSave,700)}
-async function cloudLoad(){
-  setCloudStatus("☁ Cloud: loading...","busy");
-  try{
-    const r=await fetch(JSONBIN_URL+"/latest?meta=false",{headers:{"X-Access-Key":JSONBIN_KEY}});
-    if(!r.ok){let msg="HTTP "+r.status;try{const j=await r.json();msg=j.message||msg}catch(e){};throw new Error(msg)}
-    const remote=await r.json();
-    if(remote && remote.data && remote.rankings){
-      data=remote.data;
-      data.pointsTable=data.pointsTable||[]; data.pointGroups=data.pointGroups||[{name:"Main Group",teams:[]}]; data.records=data.records||[];
-      Object.assign(rankings,remote.rankings);
-      localStorage.setItem("cricketPortalData",JSON.stringify(data));
-      localStorage.setItem("cricketPortalRankings",JSON.stringify(rankings));
-      cloudLoaded=true; render(); setCloudStatus("☁ Cloud: connected","ok");
-    }else{
-      cloudLoaded=true; setCloudStatus("☁ Cloud: ready","ok"); scheduleCloudSave();
-    }
-  }catch(e){console.error("JSONBin load:",e);setCloudStatus("☁ Cloud: offline (local)","local");}
-}
-
+const JSONBIN_BIN="6ab028ccac6210605ae36c5b";
+const JSONBIN_KEY="$2a$10$cqwLVnVns0JkWFKuxYg0fe3Sz8XwBzqW1HsC.UESBIfBPvXGB/H5S";
+const JSONBIN_URL=`https://api.jsonbin.io/v3/b/${JSONBIN_BIN}`;
+let cloudBusy=false;
+function setCloudStatus(status,msg){const el=$("cloudStatus"),m=$("cloudMessage");if(!el)return;el.textContent=status;el.className=status.includes("Connected")?"cloud-online":status.includes("Offline")?"cloud-offline":"cloud-saving";if(m)m.textContent=msg||"";}
+async function readCloudResponse(r){const raw=await r.text();let j=null;try{j=raw?JSON.parse(raw):null}catch(_){ }if(r.ok)return j;const msg=(j&&j.message)?j.message:(raw||("HTTP "+r.status));const e=new Error(msg);e.status=r.status;e.details=raw;throw e}
+function cloudErrorMessage(e){const status=e?.status?"HTTP "+e.status+" — ":"";const msg=String(e?.message||e||"Unknown error");if(e?.name==="TypeError"&&/fetch|network|failed/i.test(msg))return "Network/CORS error. Use the HTTPS GitHub Pages site, not a content:// local file.";return status+msg}
+function explain401(msg){const m=String(msg||"");if(/X-Access-Key.*invalid|bin doesn.t belong/i.test(m))return m+". JSONBin documents this as an invalid Access Key OR a Bin that is not owned by the same account. Also make sure you copied the actual 'Access Key' value, not 'Access Key ID'.";return m}
+async function cloudRequest(method,path,body){const headers={"X-Access-Key":JSONBIN_KEY,"Accept":"application/json"};if(body!==undefined)headers["Content-Type"]="application/json";const r=await fetch(JSONBIN_URL+path,{method,headers,body:body===undefined?undefined:JSON.stringify(body),cache:"no-store"});return readCloudResponse(r)}
+async function cloudTestNow(){if(cloudBusy)return;cloudBusy=true;setCloudStatus("Testing...","Checking Bin ID + Access Key with JSONBin.");try{const j=await cloudRequest("GET","/latest?meta=false");setCloudStatus("Connected","JSONBin authentication is working. Latest version is reachable.");console.log("JSONBin test success",j);}catch(e){let msg=cloudErrorMessage(e);if(e?.status===401)msg=explain401(msg);setCloudStatus("Offline",msg);console.error("JSONBin connection test",e);}finally{cloudBusy=false}}
+async function cloudUploadNow(){if(cloudBusy)return;cloudBusy=true;setCloudStatus("Saving...","Uploading latest website data to JSONBin.");try{const payload={cricketPortalData:data,cricketPortalRankings:rankings};await cloudRequest("PUT","",payload);localStorage.setItem("cricketPortalData",JSON.stringify(data));localStorage.setItem("cricketPortalRankings",JSON.stringify(rankings));setCloudStatus("Connected","Cloud data saved successfully.");}catch(e){let msg=cloudErrorMessage(e);if(e?.status===401)msg=explain401(msg);setCloudStatus("Offline","Cloud save failed: "+msg+". Local backup is still available.");console.error("JSONBin upload error",e);}finally{cloudBusy=false}}
+async function cloudDownloadNow(){if(cloudBusy)return;cloudBusy=true;setCloudStatus("Loading...","Downloading data from JSONBin.");try{const j=await cloudRequest("GET","/latest");const x=j?.record?.cricketPortalData||j?.record;if(x&&typeof x==="object"){data=x;localStorage.setItem("cricketPortalData",JSON.stringify(data));if(j?.record?.cricketPortalRankings)localStorage.setItem("cricketPortalRankings",JSON.stringify(j.record.cricketPortalRankings));render();loadAdmin();}setCloudStatus("Connected","Cloud data loaded successfully.");}catch(e){let msg=cloudErrorMessage(e);if(e?.status===401)msg=explain401(msg);setCloudStatus("Offline","Cloud load failed: "+msg+". Local data remains active.");console.error("JSONBin download error",e);}finally{cloudBusy=false}}
+async function cloudSyncNow(){await cloudTestNow();if($('cloudStatus')?.textContent==="Connected")await cloudDownloadNow()}
+function save(){localStorage.setItem("cricketPortalData",JSON.stringify(data));render();cloudUploadNow()}
 function page(id,b){if(id==="admin"&&!admin){openLogin();return}document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));$(id).classList.add("active");document.querySelectorAll(".nav button").forEach(x=>x.classList.remove("active"));if(b)b.classList.add("active")}
 function openLogin(){$("login").style.display="flex";$("pass").focus()}
 function doLogin(){if($("pass").value===PASS){admin=true;$("login").style.display="none";$("adminBtn").style.display="none";$("logoutBtn").style.display="inline-block";let b=document.createElement("button");b.id="adminNav";b.textContent="Admin";b.onclick=()=>page("admin",b);document.querySelector(".nav").appendChild(b);page("admin",b);loadAdmin()}else{$("err").textContent="Incorrect password";$("pass").value=""}}
@@ -310,7 +286,6 @@ function loadRankingsPersisted(){
 }
 function persistRankings(){
   localStorage.setItem("cricketPortalRankings",JSON.stringify(rankings));
-  scheduleCloudSave();
 }
 loadRankingsPersisted();
 
@@ -456,7 +431,7 @@ function saveSquads(){data.squads=$("squadEdit").value.split("\n").filter(Boolea
 function addNews(){let n={title:$("nt").value,date:$("nd").value||"Today",text:$("nx").value,icon:$("ni").value||"🏏"};if(!n.title||!n.text)return alert("Enter title and text");data.news.unshift(n);["nt","nd","nx","ni"].forEach(x=>$(x).value="");save()}
 function removeNews(i){if(confirm("Remove news?")){data.news.splice(i,1);save()}}
 render();
-cloudLoad();
+setTimeout(()=>cloudDownloadNow(),300);
 </script>
 <!-- ICC OFFICIAL Settings -->
 <button class="v6-settings-btn" id="v6SettingsBtn" aria-label="Settings">⚙</button>
