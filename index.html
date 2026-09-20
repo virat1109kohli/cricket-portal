@@ -1,0 +1,573 @@
+<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ICC OFFICIAL - Cricket Portal</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#07111e;color:#fff;font-family:Arial,sans-serif}.head{background:#0b1a30;padding:15px;position:sticky;top:0;z-index:5}.bar{max-width:1200px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}.logo{font-size:23px;font-weight:900}.logo b{color:#00d285}.nav button,.admin{border:0;padding:10px 14px;border-radius:8px;background:transparent;color:#b9c4d3;font-weight:bold;cursor:pointer}.nav button.active,.nav button:hover{background:#00d285;color:#000}.admin{background:#3182ce;color:#fff}.logout{background:#e53e3e;color:#fff}.page{display:none;max-width:1200px;margin:auto;padding:25px 18px}.page.active{display:block}.hero{background:linear-gradient(135deg,#0d3156,#0b1a30);padding:35px 25px;border-radius:18px;margin-bottom:20px}.hero small{color:#00d285;font-weight:bold;letter-spacing:2px}.hero h1{font-size:clamp(32px,6vw,60px);margin:8px 0}.hero p{color:#cbd5e1;line-height:1.5}.cards,.news,.matches,.squads{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.card,.newsCard,.match,.squad{background:#122540;border-radius:14px;padding:18px}.newsCard{border:1px solid #24496e}.newsIcon{font-size:42px}.dim{color:#a0aec0;font-size:13px}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.tabs button{padding:8px 14px;background:#122540;color:#a0aec0;border:1px solid #2a4365;border-radius:7px;font-weight:bold}.tabs button.active{background:#00d285;color:#000}.search{width:240px;padding:11px;border-radius:20px;border:1px solid #2a4365;background:#122540;color:#fff;margin-bottom:12px}.table{background:#122540;border-radius:10px;overflow:auto}table{width:100%;border-collapse:collapse}th,td{padding:14px 17px;border-bottom:1px solid #1a365d;text-align:left}th{background:#081526;color:#a0aec0;font-size:12px;text-transform:uppercase}.rank{color:#00d285;font-weight:bold}.teams{display:flex;justify-content:space-between;align-items:center;text-align:center;margin:20px 0}.team{font-weight:bold;width:43%}.meta{font-size:13px;color:#cbd5e1;display:grid;gap:8px}.badge{color:#00d285;background:#063b30;border-radius:20px;padding:5px 9px;font-size:11px;font-weight:bold}.adminPanel{background:#081a2e;border:1px solid #294d70;border-radius:15px;padding:20px}.form{display:grid;grid-template-columns:1fr 1fr;gap:10px}.form label{font-size:12px;color:#cbd5e1}.form input,.form textarea{width:100%;padding:11px;margin-top:5px;background:#102847;color:#fff;border:1px solid #34516f;border-radius:8px}.full{grid-column:1/-1}.btn{border:0;border-radius:8px;padding:10px 14px;font-weight:bold;margin-top:10px}.btn.blue{background:#3182ce;color:#fff}.btn.gray{background:#334155;color:#fff}.green{background:#00d285;color:#000}.red{background:#fee2e2;color:#991b1b}.row{background:#102847;padding:10px;border-radius:8px;margin-top:7px;display:flex;justify-content:space-between;gap:8px;align-items:center}.login{position:fixed;inset:0;background:#06162b;z-index:99;display:none;align-items:center;justify-content:center;padding:20px}.loginBox{background:#fff;color:#172033;padding:28px;border-radius:18px;width:min(400px,100%)}.loginBox input{width:100%;padding:13px;margin:12px 0;border:1px solid #ccd5df;border-radius:8px}.loginBox button{width:100%;padding:13px;background:#0d3b73;color:#fff;border:0;border-radius:8px;font-weight:bold}.err{color:#d00;font-size:13px;height:18px}@media(max-width:800px){.cards,.news,.matches,.squads{grid-template-columns:1fr}.form{grid-template-columns:1fr}.full{grid-column:auto}}
+</style>
+<style id="cloud-sync-style">
+#cloudStatus{position:fixed;right:12px;bottom:12px;z-index:80;padding:8px 12px;border-radius:999px;font:700 12px Arial;background:#334155;color:#fff;box-shadow:0 5px 18px rgba(0,0,0,.15)}
+#cloudStatus.ok{background:#087f5b}#cloudStatus.busy{background:#2563eb}#cloudStatus.err{background:#b91c1c;color:#fff}#cloudStatus.local{background:#64748b}
+</style>
+<style id="icc-official-style">
+.icc-official-brand{display:flex;align-items:center;gap:10px}
+.icc-official-mark{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;
+justify-content:center;background:linear-gradient(135deg,#061a4f,#0b63c7);
+border:2px solid rgba(255,255,255,.9);color:#fff;font-weight:900;font-size:11px;
+letter-spacing:-.4px;box-shadow:0 4px 14px rgba(0,35,100,.25)}
+.icc-official-name{font-weight:900;letter-spacing:.8px}
+.icc-official-sub{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;opacity:.72}
+</style>
+
+
+<style id="v5-organized-upgrade">
+/* Organized v5 refresh */
+:root{
+  --icc-navy:#061a4f;
+  --icc-blue:#0b63c7;
+  --icc-sky:#eaf3ff;
+  --icc-border:#dbe5f0;
+  --icc-text:#122033;
+}
+body{background:#f5f8fc}
+.container,.page,.main,.content{max-width:1200px}
+.card,.panel,.admin-card,.stat-card{
+  border:1px solid var(--icc-border)!important;
+  border-radius:16px!important;
+  box-shadow:0 8px 24px rgba(16,45,80,.07)!important;
+}
+button,.btn{
+  border-radius:10px!important;
+  font-weight:700;
+}
+input,select,textarea{
+  border-radius:10px!important;
+  border:1px solid #cbd7e5!important;
+  min-height:40px;
+}
+nav,.nav,.tabs{
+  gap:6px;
+}
+.section-title,.page-title{
+  color:var(--icc-navy);
+  font-weight:900;
+}
+.v5-section{
+  margin:22px 0;
+  padding:18px;
+  border:1px solid var(--icc-border);
+  border-radius:16px;
+  background:#fff;
+}
+.v5-section-head{
+  display:flex;justify-content:space-between;align-items:center;gap:12px;
+  margin-bottom:14px;flex-wrap:wrap;
+}
+.v5-section-head h3{margin:0;color:var(--icc-navy)}
+.v5-badge{
+  display:inline-flex;align-items:center;padding:5px 9px;border-radius:999px;
+  background:var(--icc-sky);color:var(--icc-navy);font-size:11px;font-weight:800;
+}
+#resetLocalData,#resetData,.reset-local-data,.reset-data{display:none!important}
+</style>
+
+
+<style id="v6-settings-style">
+:root{
+  --site-bg:#f5f8fc;--site-card:#fff;--site-text:#122033;--site-muted:#64748b;
+  --site-border:#dbe5f0;--site-primary:#061a4f;--site-accent:#0b63c7;
+}
+body.v6-dark{--site-bg:#0b1220;--site-card:#121c2e;--site-text:#edf4ff;--site-muted:#a8b5c7;--site-border:#26364d;--site-primary:#dbeafe;--site-accent:#4da3ff;background:var(--site-bg)!important;color:var(--site-text)!important}
+body.v6-dark .card,body.v6-dark .panel,body.v6-dark .admin-card,body.v6-dark .stat-card,
+body.v6-dark .v5-section{background:var(--site-card)!important;border-color:var(--site-border)!important;color:var(--site-text)!important}
+.v6-settings-btn{position:fixed;right:16px;bottom:18px;z-index:10000;width:52px;height:52px;border:0;border-radius:50%;
+background:linear-gradient(135deg,#061a4f,#0b63c7);color:#fff;font-size:22px;cursor:pointer;box-shadow:0 8px 24px rgba(0,30,80,.3)}
+.v6-overlay{position:fixed;inset:0;background:rgba(2,10,25,.55);z-index:10001;display:none}
+.v6-overlay.open{display:block}
+.v6-settings{position:absolute;right:0;top:0;height:100%;width:min(390px,92vw);background:var(--site-card);color:var(--site-text);
+padding:22px;overflow:auto;box-shadow:-10px 0 35px rgba(0,0,0,.18)}
+.v6-settings-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.v6-settings-head h2{margin:0;font-size:21px}
+.v6-close{border:0;background:transparent;font-size:26px;cursor:pointer;color:inherit}
+.v6-setting-group{padding:15px 0;border-top:1px solid var(--site-border)}
+.v6-setting-row{display:flex;justify-content:space-between;align-items:center;gap:14px;margin:12px 0}
+.v6-setting-row strong{display:block;font-size:14px}
+.v6-setting-row small{color:var(--site-muted);display:block;margin-top:3px}
+.v6-toggle{width:48px;height:27px;border-radius:20px;border:0;background:#cbd5e1;position:relative;cursor:pointer;flex:0 0 auto}
+.v6-toggle:after{content:"";position:absolute;top:3px;left:3px;width:21px;height:21px;border-radius:50%;background:#fff;transition:.2s}
+.v6-toggle.on{background:#0b63c7}
+.v6-toggle.on:after{left:24px}
+.v6-admin-box{display:none;margin-top:12px;padding:13px;border-radius:12px;background:rgba(11,99,199,.08);border:1px solid var(--site-border)}
+.v6-admin-box.show{display:block}
+.v6-admin-box input{width:100%;box-sizing:border-box;margin:7px 0;padding:10px;border:1px solid var(--site-border);border-radius:9px;background:var(--site-card);color:var(--site-text)}
+.v6-action{border:0;border-radius:9px;padding:9px 13px;font-weight:800;cursor:pointer;background:#061a4f;color:#fff}
+.v6-note{font-size:12px;color:var(--site-muted);line-height:1.5}
+</style>
+
+</head><body><div id="cloudStatus" class="busy">☁ Cloud: connecting...</div>
+
+
+
+<div id="login" class="login"><div class="loginBox"><h2>🔐 Admin Login</h2><p>Only the administrator can edit this website.</p><input id="pass" type="password" placeholder="Admin password"><div id="err" class="err"></div><button onclick="doLogin()">Login</button></div></div>
+<header class="head"><div class="bar"><div class="logo">CRICKET<b>WORLD</b></div><div class="nav"><button class="active" onclick="page('home',this)">Home</button><button onclick="page('tournament',this)">Tournament</button><button onclick="page('rankings',this)">Rankings</button><button onclick="page('records',this)">Records</button></div><div><button id="adminBtn" class="admin" onclick="openLogin()">Admin Login</button><button id="logoutBtn" class="admin logout" style="display:none" onclick="logout()">Logout</button> </div></div></header>
+
+<section id="home" class="page active"><div class="hero"><small>ICC OFFICIAL</small><h1 id="homeTitle"></h1><p id="homeIntro"></p></div><div class="cards"><div class="card"><span class="dim">Featured Tournament</span><h3 id="homeTour"></h3></div><div class="card"><span class="dim">Rankings</span><h3>Teams • Batters • Bowlers</h3></div><div class="card"><span class="dim">Private Admin</span><h3>Password Protected</h3></div></div><h2>Latest News</h2><div id="news" class="news"></div></section>
+
+<section id="tournament" class="page"><div class="hero"><small id="edition"></small><h1 id="tourName"></h1><p id="tourDesc"></p></div><div class="cards"><div class="card"><span class="dim">Matches</span><h2 id="mc"></h2></div><div class="card"><span class="dim">Teams</span><h2 id="tc"></h2></div><div class="card"><span class="dim">Venues</span><h2 id="vc"></h2></div></div><h2>Matches</h2><div id="matches" class="matches"></div>
+<h2>Points Table</h2>
+<div style="margin-bottom:10px"><label>Group <select id="publicGroupSelect" onchange="renderPoints()" style="padding:8px;border-radius:8px"></select></label></div>
+<div class="table"><table><thead><tr><th>Pos</th><th>Team</th><th>Played</th><th>Won</th><th>Lost</th><th>Tied</th><th>NR</th><th>Points</th><th>NRR</th></tr></thead><tbody id="pointsBody"></tbody></table></div>
+<p class="dim">Points are calculated from completed match results. You can also edit the table from Admin.</p>
+<h2>Squads</h2><div id="squads" class="squads"></div></section>
+
+<section id="rankings" class="page"><div class="hero"><small>WORLD RANKINGS</small><h1>Rankings Dashboard</h1><p>Teams, batters, bowlers and all-rounders.</p></div><input id="search" class="search" placeholder="Search..." oninput="filter()"><div class="tabs" id="cats"><button class="active" onclick="cat('teams',this)">Teams</button><button onclick="cat('batters',this)">Batters</button><button onclick="cat('bowlers',this)">Bowlers</button><button onclick="cat('allrounders',this)">All-Rounders</button></div><div class="tabs" id="formats"><button class="active" onclick="fmt('TEST',this)">TEST</button><button onclick="fmt('ODI',this)">ODI</button><button onclick="fmt('T20I',this)">T20I</button></div><div class="table"><table><thead><tr id="th"></tr></thead><tbody id="tb"></tbody></table></div></section>
+
+<section id="records" class="page"><div class="hero"><small>CRICKET RECORDS</small><h1>Records & Stats</h1><p>Runs, wickets, centuries, bowling figures and other cricket records. Admin can add, edit or remove records.</p></div><div class="tabs" id="recordFormats"><button class="active" onclick="recordFmt('ALL',this)">ALL</button><button onclick="recordFmt('TEST',this)">TEST</button><button onclick="recordFmt('ODI',this)">ODI</button><button onclick="recordFmt('T20I',this)">T20I</button></div><div class="tabs" id="recordCats"><button class="active" onclick="recordCat('Batting',this)">Batting</button><button onclick="recordCat('Bowling',this)">Bowling</button><button onclick="recordCat('Fielding',this)">Fielding</button><button onclick="recordCat('Team',this)">Team</button><button onclick="recordCat('Other',this)">Other</button></div><div id="recordsGrid" class="cards"></div></section><section id="admin" class="page"><div class="adminPanel"><h2>⚙ Admin Panel</h2><p class="dim">Only you can access this section after entering the password.</p>
+<h3>Home</h3><div class="form"><label>Title<input id="etitle"></label><label>Featured Tournament<input id="etour"></label><label class="full">Introduction<textarea id="eintro" rows="2"></textarea></label></div><button class="btn green" onclick="saveHome()">Save Home</button>
+<hr><h3>Tournament</h3><div class="form"><label>Name<input id="ename"></label><label>Edition<input id="eedition"></label><label class="full">Description<textarea id="edesc" rows="2"></textarea></label></div><button class="btn green" onclick="saveTour()">Save Tournament</button>
+<hr><h3>Matches & Results</h3>
+<p class="dim">Add a match, then use Edit to change date, venue, score or result.</p>
+<div class="form">
+<label>Team 1<input id="m1"></label><label>Team 2<input id="m2"></label>
+<label>Date & Time <span class="dim">(Optional)</span><input id="mt" type="datetime-local"></label><label>Venue<input id="mv"></label>
+<label>Round<input id="mr"></label>
+<label>Result<select id="mres" style="width:100%;padding:11px;margin-top:5px;background:#102847;color:#fff;border:1px solid #34516f;border-radius:8px">
+<option value="scheduled">Scheduled</option><option value="t1">Team 1 Won</option><option value="t2">Team 2 Won</option><option value="tie">Tie</option><option value="nr">No Result</option></select></label>
+<label>Team 1 Score<input id="ms1" placeholder="e.g. 178/6"></label>
+<label>Team 2 Score<input id="ms2" placeholder="e.g. 176/8"></label>
+</div>
+<button class="btn green" onclick="saveMatchForm()">+ Add Match</button>
+<button class="btn gray" id="cancelMatchBtn" style="display:none" onclick="cancelMatchEdit()">Cancel Edit</button>
+<div id="matchList"></div>
+<hr><h3>✏️ Edit Points Table</h3>
+<p class="dim">Change Played, Won, Lost, Tied, NR, Points and NRR manually, or recalculate from results.</p>
+<div id="pointsEditor"></div>
+<button class="btn blue" onclick="savePointsTable()">Save Points Table</button>
+<button class="btn gray" onclick="recalculatePoints()">Recalculate From Results</button>
+<hr><h3>✏️ Edit Rankings</h3>
+<p class="dim">Yahan aap har format/category ki Top 10 ranking ko edit, add ya remove kar sakte hain. Rank automatically 1–10 ho jayegi.</p>
+<div class="form">
+<label>Category<select id="rCat" style="width:100%;padding:11px;margin-top:5px;background:#102847;color:#fff;border:1px solid #34516f;border-radius:8px"><option value="teams">Teams</option><option value="batters">Batters</option><option value="bowlers">Bowlers</option><option value="allrounders">All-Rounders</option></select></label>
+<label>Format<select id="rFmt" style="width:100%;padding:11px;margin-top:5px;background:#102847;color:#fff;border:1px solid #34516f;border-radius:8px"><option>TEST</option><option>ODI</option><option>T20I</option></select></label>
+</div>
+<div id="rankingEditor" style="margin-top:12px"></div>
+<button class="btn green" onclick="addRankingRow()">+ Add Ranking</button>
+<button class="btn green" onclick="saveRankings()">Save Rankings</button>
+<hr><h3>🏆 Records & Stats</h3><p class="dim">Yahan highest run scorer, highest wicket taker, highest score, best bowling figures, most centuries aur koi bhi custom cricket stat add/edit kar sakte hain.</p><div class="form"><label>Record Title<input id="recTitle" placeholder="Most Runs"></label><label>Format<select id="recFmt" style="width:100%;padding:11px;margin-top:5px;background:#102847;color:#fff;border:1px solid #34516f;border-radius:8px"><option>TEST</option><option>ODI</option><option>T20I</option><option>ALL</option></select></label><label>Category<select id="recCat" style="width:100%;padding:11px;margin-top:5px;background:#102847;color:#fff;border:1px solid #34516f;border-radius:8px"><option>Batting</option><option>Bowling</option><option>Fielding</option><option>Team</option><option>Other</option></select></label><label>Player / Team<input id="recHolder" placeholder="Player or team name"></label><label>Country / Team<input id="recTeam" placeholder="India"></label><label>Record Value<input id="recValue" placeholder="15,921 runs"></label><label class="full">Details<textarea id="recDetail" rows="2" placeholder="Optional extra statistic"></textarea></label></div><button class="btn green" id="recSaveBtn" onclick="saveRecordForm()">+ Add Record</button><button class="btn gray" id="recCancelBtn" style="display:none" onclick="cancelRecordEdit()">Cancel Edit</button><div id="recordAdminList"></div><hr><h3>Squads</h3><p class="dim">One line: Team | Player 1, Player 2, Player 3</p><textarea id="squadEdit" rows="8" style="width:100%;padding:10px;background:#102847;color:#fff;border:1px solid #34516f;border-radius:8px"></textarea><br><button class="btn green" onclick="saveSquads()">Save Squads</button>
+<hr><h3>News</h3><div class="form"><label>Title<input id="nt"></label><label>Date<input id="nd"></label><label class="full">Text<textarea id="nx" rows="3"></textarea></label><label>Icon<input id="ni" placeholder="🏏"></label></div><button class="btn green" onclick="addNews()">+ Add News</button><div id="newsList"></div>
+</div></section><footer style="text-align:center;padding:25px;color:#a0aec0">Cricket World Portal</footer>
+
+<script>
+const PASS="reyan0412";
+const rankings={
+teams:{
+TEST:[
+["Australia","126","3411"],["South Africa","119","2256"],["New Zealand","106","2336"],["India","105","3042"],["England","102","3658"],["Pakistan","89","2100"],["Sri Lanka","84","1850"],["West Indies","76","1620"],["Bangladesh","65","1400"],["Zimbabwe","32","600"]],
+ODI:[
+["India","121","4500"],["Australia","118","4200"],["Pakistan","109","3800"],["South Africa","106","3500"],["New Zealand","102","3200"],["England","97","3000"],["Sri Lanka","93","2800"],["Bangladesh","88","2600"],["Afghanistan","80","2200"],["West Indies","75","1900"]],
+T20I:[
+["India","269","16922"],["England","268","10186"],["Australia","260","9868"],["New Zealand","247","12348"],["South Africa","243","12881"],["Pakistan","240","13679"],["West Indies","234","13079"],["Bangladesh","224","11860"],["Sri Lanka","221","9703"],["Afghanistan","220","8355"]]
+},
+batters:{
+TEST:[
+["Joe Root","ENG","899"],["Kane Williamson","NZ","852"],["Harry Brook","ENG","856"],["Steve Smith","AUS","840"],["Daryl Mitchell","NZ","780"],["Babar Azam","PAK","765"],["Usman Khawaja","AUS","750"],["Rishabh Pant","IND","730"],["Travis Head","AUS","718"],["Rohit Sharma","IND","705"]],
+ODI:[
+["Babar Azam","PAK","822"],["Shubman Gill","IND","801"],["Virat Kohli","IND","767"],["Rohit Sharma","IND","758"],["Daryl Mitchell","NZ","740"],["Harry Tector","IRE","710"],["David Warner","AUS","690"],["Shai Hope","WI","680"],["Dawid Malan","ENG","670"],["Ibrahim Zadran","AFG","660"]],
+T20I:[
+["Travis Head","AUS","844"],["Suryakumar Yadav","IND","805"],["Phil Salt","ENG","798"],["Babar Azam","PAK","755"],["Mohammad Rizwan","PAK","740"],["Yashasvi Jaiswal","IND","720"],["Jos Buttler","ENG","710"],["Aiden Markram","SA","690"],["Brandon King","WI","670"],["Pathum Nissanka","SL","660"]]
+},
+bowlers:{
+TEST:[
+["Jasprit Bumrah","IND","870"],["Kagiso Rabada","SA","850"],["Pat Cummins","AUS","835"],["Josh Hazlewood","AUS","820"],["Ravichandran Ashwin","IND","810"],["Mitchell Starc","AUS","790"],["Prabath Jayasuriya","SL","770"],["James Anderson","ENG","750"],["Shaheen Afridi","PAK","740"],["Ollie Robinson","ENG","725"]],
+ODI:[
+["Keshav Maharaj","SA","716"],["Josh Hazlewood","AUS","688"],["Mohammed Siraj","IND","680"],["Jasprit Bumrah","IND","675"],["Rashid Khan","AFG","669"],["Trent Boult","NZ","660"],["Shaheen Afridi","PAK","650"],["Kuldeep Yadav","IND","645"],["Bernard Scholtz","NAM","630"],["Adam Zampa","AUS","625"]],
+T20I:[
+["Adil Rashid","ENG","718"],["Akeal Hosein","WI","700"],["Rashid Khan","AFG","690"],["Wanindu Hasaranga","SL","675"],["Axar Patel","IND","660"],["Anrich Nortje","SA","650"],["Adam Zampa","AUS","645"],["Fazalhaq Farooqi","AFG","635"],["Arshdeep Singh","IND","630"],["Maheesh Theekshana","SL","620"]]
+},
+allrounders:{
+TEST:[
+["Ravindra Jadeja","IND","445"],["Ravichandran Ashwin","IND","330"],["Shakib Al Hasan","BAN","310"],["Joe Root","ENG","250"],["Jason Holder","WI","240"],["Ben Stokes","ENG","230"],["Pat Cummins","AUS","220"],["Marco Jansen","SA","210"],["Axar Patel","IND","200"],["Mehidy Hasan Miraz","BAN","195"]],
+ODI:[
+["Mohammad Nabi","AFG","320"],["Sikandar Raza","ZIM","288"],["Shakib Al Hasan","BAN","275"],["Rashid Khan","AFG","255"],["Glenn Maxwell","AUS","240"],["Mitchell Santner","NZ","230"],["Zeeshan Maqsood","OMA","215"],["Mehidy Hasan Miraz","BAN","210"],["Ravindra Jadeja","IND","200"],["Hardik Pandya","IND","190"]],
+T20I:[
+["Hardik Pandya","IND","240"],["Wanindu Hasaranga","SL","230"],["Marcus Stoinis","AUS","225"],["Sikandar Raza","ZIM","210"],["Shakib Al Hasan","BAN","205"],["Mohammad Nabi","AFG","198"],["Liam Livingstone","ENG","185"],["Dipendra Singh Airee","NEP","175"],["Aiden Markram","SA","165"],["Moeen Ali","ENG","160"]]
+}};
+const defaults={home:{title:"World ICC OFFICIAL",intro:"Latest tournament news, fixtures, squads, venues and rankings — all in one place.",tour:"ICC Style World Cricket Cup"},tour:{name:"ICC Style World Cricket Cup",edition:"2026",desc:"Tournament fixtures, venues, match times and squads."},matches:[{t1:"Pakistan",t2:"India",time:"2026-10-10T19:30",venue:"Gaddafi Stadium, Lahore",round:"Match 1 • Group Stage"},{t1:"Australia",t2:"England",time:"2026-10-11T15:00",venue:"Melbourne Cricket Ground",round:"Match 2 • Group Stage"},{t1:"South Africa",t2:"New Zealand",time:"2026-10-12T18:30",venue:"Newlands, Cape Town",round:"Match 3 • Group Stage"}],squads:[{team:"Pakistan",players:["Babar Azam","Mohammad Rizwan","Shaheen Afridi","Naseem Shah"]},{team:"India",players:["Rohit Sharma","Virat Kohli","Jasprit Bumrah","Rishabh Pant"]},{team:"Australia",players:["Pat Cummins","Mitchell Starc","Steve Smith","Travis Head"]}],news:[{title:"Tournament Hub Is Live",date:"18 Sep 2026",text:"Fixtures, squads and venues are available in the tournament centre.",icon:"🏏"},{title:"World Rankings",date:"18 Sep 2026",text:"Check team and player rankings across all formats.",icon:"🏆"}]};
+const JSONBIN_ID="6ab02342ac6210605ae35f34";
+const JSONBIN_KEY="6ab02296ffd5d160531cf209";
+const JSONBIN_URL=`https://api.jsonbin.io/v3/b/${JSONBIN_ID}`;
+let cloudTimer=null,cloudBusy=false,cloudLoaded=false;
+function setCloudStatus(text,cls){const el=$("cloudStatus");if(el){el.textContent=text;el.className=cls||""}}
+function localData(){try{return JSON.parse(localStorage.getItem("cricketPortalData")||"null")}catch(e){return null}}
+let data=localData()||JSON.parse(JSON.stringify(defaults));
+data.pointsTable=data.pointsTable||[]; data.pointGroups=data.pointGroups||[{name:"Main Group",teams:[]}]; data.records=data.records||[{category:"Batting",format:"TEST",title:"Most Runs",holder:"Sachin Tendulkar",team:"India",value:"15,921 runs",detail:"Test career"},{category:"Bowling",format:"TEST",title:"Most Wickets",holder:"Muttiah Muralitharan",team:"Sri Lanka",value:"800 wickets",detail:"Test career"},{category:"Batting",format:"ODI",title:"Most Runs",holder:"Sachin Tendulkar",team:"India",value:"18,426 runs",detail:"ODI career"},{category:"Bowling",format:"ODI",title:"Most Wickets",holder:"Muttiah Muralitharan",team:"Sri Lanka",value:"534 wickets",detail:"ODI career"},{category:"Batting",format:"T20I",title:"Most Runs",holder:"Virat Kohli",team:"India",value:"4,188 runs",detail:"T20I career"},{category:"Bowling",format:"T20I",title:"Most Wickets",holder:"Tim Southee",team:"New Zealand",value:"164 wickets",detail:"T20I career"}];
+let admin=false,category="teams",format="TEST",editingMatch=-1,recordFormat="ALL",recordCategory="Batting",editingRecord=-1;
+const $=x=>document.getElementById(x),esc=x=>String(x??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+function save(){localStorage.setItem("cricketPortalData",JSON.stringify(data));render();scheduleCloudSave()}
+function cloudPayload(){return {data,rankings,updatedAt:new Date().toISOString(),source:"ICC Cricket Portal"}}
+async function cloudSave(){
+  if(cloudBusy)return; cloudBusy=true; setCloudStatus("☁ Cloud: saving...","busy");
+  try{
+    const r=await fetch(JSONBIN_URL,{method:"PUT",headers:{"Content-Type":"application/json","X-Access-Key":JSONBIN_KEY,"X-Bin-Versioning":"true"},body:JSON.stringify(cloudPayload())});
+    if(!r.ok){let msg="HTTP "+r.status;try{const j=await r.json();msg=j.message||msg}catch(e){};throw new Error(msg)}
+    setCloudStatus("☁ Cloud: connected","ok");
+  }catch(e){console.error("JSONBin save:",e);setCloudStatus("☁ Cloud: error","err");}
+  finally{cloudBusy=false}
+}
+function scheduleCloudSave(){clearTimeout(cloudTimer);cloudTimer=setTimeout(cloudSave,700)}
+async function cloudLoad(){
+  setCloudStatus("☁ Cloud: loading...","busy");
+  try{
+    const r=await fetch(JSONBIN_URL+"/latest?meta=false",{headers:{"X-Access-Key":JSONBIN_KEY}});
+    if(!r.ok){let msg="HTTP "+r.status;try{const j=await r.json();msg=j.message||msg}catch(e){};throw new Error(msg)}
+    const remote=await r.json();
+    if(remote && remote.data && remote.rankings){
+      data=remote.data;
+      data.pointsTable=data.pointsTable||[]; data.pointGroups=data.pointGroups||[{name:"Main Group",teams:[]}]; data.records=data.records||[];
+      Object.assign(rankings,remote.rankings);
+      localStorage.setItem("cricketPortalData",JSON.stringify(data));
+      localStorage.setItem("cricketPortalRankings",JSON.stringify(rankings));
+      cloudLoaded=true; render(); setCloudStatus("☁ Cloud: connected","ok");
+    }else{
+      cloudLoaded=true; setCloudStatus("☁ Cloud: ready","ok"); scheduleCloudSave();
+    }
+  }catch(e){console.error("JSONBin load:",e);setCloudStatus("☁ Cloud: offline (local)","local");}
+}
+
+function page(id,b){if(id==="admin"&&!admin){openLogin();return}document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));$(id).classList.add("active");document.querySelectorAll(".nav button").forEach(x=>x.classList.remove("active"));if(b)b.classList.add("active")}
+function openLogin(){$("login").style.display="flex";$("pass").focus()}
+function doLogin(){if($("pass").value===PASS){admin=true;$("login").style.display="none";$("adminBtn").style.display="none";$("logoutBtn").style.display="inline-block";let b=document.createElement("button");b.id="adminNav";b.textContent="Admin";b.onclick=()=>page("admin",b);document.querySelector(".nav").appendChild(b);page("admin",b);loadAdmin()}else{$("err").textContent="Incorrect password";$("pass").value=""}}
+$("pass").addEventListener("keydown",e=>{if(e.key==="Enter")doLogin()});
+function logout(){admin=false;$("logoutBtn").style.display="none";$("adminBtn").style.display="inline-block";$("adminNav")?.remove();page("home")}
+function getSelectedGroup(){
+  const groups=data.pointGroups||[];
+  return groups.find(g=>g.name===($("publicGroupSelect")?.value||""))||groups[0];
+}
+function getTeamNames(group){
+  const names=new Set((group?.teams||[]));
+  data.matches.forEach(m=>{
+    if(group?.teams?.length){
+      if(group.teams.includes(m.t1))names.add(m.t1);
+      if(group.teams.includes(m.t2))names.add(m.t2);
+    }else{
+      if(m.t1)names.add(m.t1); if(m.t2)names.add(m.t2);
+    }
+  });
+  (data.pointsTable||[]).forEach(x=>{
+    if(!group?.teams?.length || group.teams.includes(x.team))names.add(x.team);
+  });
+  return [...names];
+}
+function buildCalculatedPoints(group){
+  const teams=getTeamNames(group),map={};
+  teams.forEach(t=>map[t]={team:t,p:0,w:0,l:0,t:0,nr:0,pts:0,nrr:"0.00"});
+  data.matches.forEach(m=>{
+    if(!map[m.t1]||!map[m.t2])return;
+    if(m.result==="t1"){map[m.t1].p++;map[m.t1].w++;map[m.t2].p++;map[m.t2].l++;map[m.t1].pts+=2}
+    else if(m.result==="t2"){map[m.t1].p++;map[m.t1].l++;map[m.t2].p++;map[m.t2].w++;map[m.t2].pts+=2}
+    else if(m.result==="tie"){map[m.t1].p++;map[m.t2].p++;map[m.t1].t++;map[m.t2].t++;map[m.t1].pts++;map[m.t2].pts++}
+    else if(m.result==="nr"){map[m.t1].p++;map[m.t2].p++;map[m.t1].nr++;map[m.t2].nr++;map[m.t1].pts++;map[m.t2].pts++}
+  });
+  return Object.values(map).sort((a,b)=>b.pts-a.pts||b.w-a.w||a.team.localeCompare(b.team));
+}
+function renderPoints(){
+  const groups=data.pointGroups||[{name:"Main Group",teams:[]}];
+  const sel=$("publicGroupSelect");
+  if(sel){
+    const old=sel.value;
+    sel.innerHTML=groups.map(g=>`<option value="${esc(g.name)}">${esc(g.name)}</option>`).join("");
+    if(groups.some(g=>g.name===old))sel.value=old;
+  }
+  const group=getSelectedGroup();
+  const manual=(data.pointsTable||[]).filter(x=>!group?.teams?.length||group.teams.includes(x.team));
+  const rows=manual.length?manual:buildCalculatedPoints(group);
+  $("pointsBody").innerHTML=rows.map((x,i)=>`<tr><td class="rank">${i+1}</td><td>${esc(x.team)}</td><td>${esc(x.p)}</td><td>${esc(x.w)}</td><td>${esc(x.l)}</td><td>${esc(x.t)}</td><td>${esc(x.nr)}</td><td><b>${esc(x.pts)}</b></td><td>${esc(x.nrr??"0.00")}</td></tr>`).join("");
+}
+function render(){
+  $("homeTitle").textContent=data.home.title;
+  $("homeIntro").textContent=data.home.intro;
+  $("homeTour").textContent=data.home.tour;
+  $("news").innerHTML=data.news.map(n=>`<article class="newsCard"><div class="newsIcon">${esc(n.icon)}</div><div class="dim">${esc(n.date)}</div><h3>${esc(n.title)}</h3><p>${esc(n.text)}</p></article>`).join("");
+  $("edition").textContent="TOURNAMENT • "+data.tour.edition;
+  $("tourName").textContent=data.tour.name;
+  $("tourDesc").textContent=data.tour.desc;
+  $("mc").textContent=data.matches.length;
+  $("tc").textContent=data.squads.length;
+  $("vc").textContent=new Set(data.matches.map(x=>x.venue)).size;
+  $("matches").innerHTML=data.matches.map(m=>{
+    const resultText={scheduled:"Scheduled",t1:m.t1+" won",t2:m.t2+" won",tie:"Match tied",nr:"No result"}[m.result||"scheduled"];
+    return `<div class="match"><span class="badge">${esc(m.round)}</span><div class="teams"><div class="team">${esc(m.t1)}</div><b>VS</b><div class="team">${esc(m.t2)}</div></div><div class="meta">${m.time?("🕒 "+esc(new Date(m.time).toLocaleString())+"<br>"):""}📍 ${esc(m.venue)}<br>🏏 ${esc(resultText)}</div>${m.score1||m.score2?`<div style="margin-top:10px;font-weight:bold;text-align:center">${esc(m.score1||"—")} &nbsp; • &nbsp; ${esc(m.score2||"—")}</div>`:""}</div>`;
+  }).join("");
+  $("squads").innerHTML=data.squads.map(s=>`<div class="squad"><h3>${esc(s.team)}</h3><p>${s.players.map(p=>`<span style="display:inline-block;background:#eef2f7;color:#172033;padding:6px 8px;border-radius:6px;margin:3px;font-size:12px">${esc(p)}</span>`).join("")}</p></div>`).join("");
+  renderPoints();
+  renderRank();
+  renderRecords();
+  if(admin)loadAdmin();
+}
+
+function loadRankingsPersisted(){
+  try{
+    const saved=JSON.parse(localStorage.getItem("cricketPortalRankings")||"null");
+    if(saved && typeof saved==="object") Object.assign(rankings,saved);
+  }catch(e){}
+}
+function persistRankings(){
+  localStorage.setItem("cricketPortalRankings",JSON.stringify(rankings));
+  scheduleCloudSave();
+}
+loadRankingsPersisted();
+
+function renderRank(){let a=rankings[category][format];$("th").innerHTML=category==="teams"?'<th>Rank</th><th>Team</th><th>Rating</th><th>Points / Matches</th>':'<th>Rank</th><th>Player</th><th>Country</th><th>Rating</th>';$("tb").innerHTML=a.map((x,i)=>`<tr><td class="rank">${i+1}</td><td>${esc(x[0])}</td><td>${esc(x[1])}</td><td>${esc(x[2])}</td></tr>`).join("");filter()}
+function cat(c,b){category=c;document.querySelectorAll("#cats button").forEach(x=>x.classList.remove("active"));b.classList.add("active");renderRank()}function fmt(f,b){format=f;document.querySelectorAll("#formats button").forEach(x=>x.classList.remove("active"));b.classList.add("active");renderRank()}function filter(){let q=$("search").value.toLowerCase();document.querySelectorAll("#tb tr").forEach(r=>r.style.display=r.innerText.toLowerCase().includes(q)?"":"none")}
+
+function renderRankingEditor(){
+  const c=$("rCat").value, f=$("rFmt").value, a=rankings[c][f];
+  $("rankingEditor").innerHTML=a.map((x,i)=>{
+    if(c==="teams") return `<div class="row"><b>#${i+1}</b><input data-r="0" value="${esc(x[0])}" style="flex:2"><input data-r="1" value="${esc(x[1])}" style="width:90px"><input data-r="2" value="${esc(x[2])}" style="width:110px"><button class="red" onclick="this.parentElement.remove()">Remove</button></div>`;
+    return `<div class="row"><b>#${i+1}</b><input data-r="0" value="${esc(x[0])}" style="flex:2"><input data-r="1" value="${esc(x[1])}" style="width:90px"><input data-r="2" value="${esc(x[2])}" style="width:90px"><button class="red" onclick="this.parentElement.remove()">Remove</button></div>`;
+  }).join("");
+}
+$("rCat")?.addEventListener("change",renderRankingEditor);
+$("rFmt")?.addEventListener("change",renderRankingEditor);
+function addRankingRow(){
+  const c=$("rCat").value;
+  if(document.querySelectorAll("#rankingEditor .row").length>=10)return alert("Maximum Top 10 reached.");
+  const row=document.createElement("div"); row.className="row";
+  row.innerHTML=c==="teams"?`<b>New</b><input data-r="0" placeholder="Team" style="flex:2"><input data-r="1" placeholder="Rating" style="width:90px"><input data-r="2" placeholder="Points" style="width:110px"><button class="red" onclick="this.parentElement.remove()">Remove</button>`:`<b>New</b><input data-r="0" placeholder="Player" style="flex:2"><input data-r="1" placeholder="Country" style="width:90px"><input data-r="2" placeholder="Rating" style="width:90px"><button class="red" onclick="this.parentElement.remove()">Remove</button>`;
+  $("rankingEditor").appendChild(row);
+}
+function saveRankings(){
+  const c=$("rCat").value,f=$("rFmt").value;
+  const rows=[...document.querySelectorAll("#rankingEditor .row")];
+  rankings[c][f]=rows.slice(0,10).map(row=>[...row.querySelectorAll("input")].map(x=>x.value.trim()));
+  persistRankings();
+  renderRank(); renderRankingEditor(); alert("Rankings saved for "+c+" • "+f);
+}
+function renderRecords(){const a=(data.records||[]).filter(r=>(recordFormat==="ALL"||r.format===recordFormat)&&r.category===recordCategory);$("recordsGrid").innerHTML=a.length?a.map((r)=>`<div class="card"><span class="badge">${esc(r.format)} • ${esc(r.category)}</span><h3>${esc(r.title)}</h3><h2 style="margin:10px 0">${esc(r.value)}</h2><p style="margin:5px 0;font-weight:bold">${esc(r.holder)}</p><p class="dim">${esc(r.team)}${r.detail?" • "+esc(r.detail):""}</p></div>`).join(""):'<div class="card"><h3>No records yet</h3><p class="dim">Admin can add a record from the Admin panel.</p></div>'}function recordFmt(f,b){recordFormat=f;document.querySelectorAll("#recordFormats button").forEach(x=>x.classList.remove("active"));b.classList.add("active");renderRecords()}function recordCat(c,b){recordCategory=c;document.querySelectorAll("#recordCats button").forEach(x=>x.classList.remove("active"));b.classList.add("active");renderRecords()}function renderRecordAdmin(){$("recordAdminList").innerHTML=(data.records||[]).map((r,i)=>`<div class="row"><span><b>${esc(r.title)}</b> • ${esc(r.holder)} • ${esc(r.value)} <span class="dim">(${esc(r.format)} / ${esc(r.category)})</span></span><span><button class="btn blue" onclick="editRecord(${i})">Edit</button> <button class="red" onclick="removeRecord(${i})">Remove</button></span></div>`).join("")}function clearRecordForm(){["recTitle","recHolder","recTeam","recValue","recDetail"].forEach(x=>$(x).value="");$("recFmt").value="TEST";$("recCat").value="Batting";editingRecord=-1;$("recCancelBtn").style.display="none";$("recSaveBtn").textContent="+ Add Record"}function saveRecordForm(){const r={title:$("recTitle").value.trim(),format:$("recFmt").value,category:$("recCat").value,holder:$("recHolder").value.trim(),team:$("recTeam").value.trim(),value:$("recValue").value.trim(),detail:$("recDetail").value.trim()};if(!r.title||!r.holder||!r.value)return alert("Record title, holder and value are required");if(editingRecord>=0){data.records[editingRecord]=r;alert("Record updated")}else{data.records.push(r);alert("Record added")}clearRecordForm();save()}function editRecord(i){const r=data.records[i];editingRecord=i;$("recTitle").value=r.title;$("recFmt").value=r.format;$("recCat").value=r.category;$("recHolder").value=r.holder;$("recTeam").value=r.team;$("recValue").value=r.value;$("recDetail").value=r.detail||"";$("recCancelBtn").style.display="inline-block";$("recSaveBtn").textContent="Save Record Changes";window.scrollTo({top:document.querySelector("#recTitle").getBoundingClientRect().top+window.scrollY-100,behavior:"smooth"})}function cancelRecordEdit(){clearRecordForm()}function removeRecord(i){if(confirm("Remove this record?")){data.records.splice(i,1);save()}}
+function loadAdmin(){
+  renderRankingEditor();
+  renderRecordAdmin();
+  $("etitle").value=data.home.title;$("eintro").value=data.home.intro;$("etour").value=data.home.tour;
+  $("ename").value=data.tour.name;$("eedition").value=data.tour.edition;$("edesc").value=data.tour.desc;
+  $("squadEdit").value=data.squads.map(s=>s.team+" | "+s.players.join(", ")).join("\n");
+  $("matchList").innerHTML=data.matches.map((m,i)=>`<div class="row"><span>${esc(m.t1)} vs ${esc(m.t2)} • ${esc({scheduled:"Scheduled",t1:m.t1+" won",t2:m.t2+" won",tie:"Tie",nr:"No Result"}[m.result||"scheduled"])}</span><span><button class="btn blue" onclick="editMatch(${i})">Edit</button> <button class="red" onclick="removeMatch(${i})">Remove</button></span></div>`).join("");
+  renderPointsEditor();
+}
+function saveHome(){data.home={title:$("etitle").value,intro:$("eintro").value,tour:$("etour").value};save();alert("Home saved")}
+function saveTour(){data.tour={name:$("ename").value,edition:$("eedition").value,desc:$("edesc").value};save();alert("Tournament saved")}
+function clearMatchForm(){
+  ["m1","m2","mt","mv","mr","ms1","ms2"].forEach(x=>$(x).value="");
+  $("mres").value="scheduled"; editingMatch=-1; $("cancelMatchBtn").style.display="none";
+  document.querySelector('[onclick="saveMatchForm()"]').textContent="+ Add Match";
+}
+function saveMatchForm(){
+  const m={t1:$("m1").value.trim(),t2:$("m2").value.trim(),time:$("mt").value,venue:$("mv").value.trim(),round:$("mr").value.trim()||"Match",result:$("mres").value,score1:$("ms1").value.trim(),score2:$("ms2").value.trim()};
+  if(!m.t1||!m.t2||!m.venue)return alert("Team 1, Team 2 and Venue are required");
+  if(editingMatch>=0){data.matches[editingMatch]=m;alert("Match updated")}
+  else{data.matches.push(m);alert("Match added")}
+  data.pointsTable=[];clearMatchForm();save();
+}
+function editMatch(i){
+  const m=data.matches[i];editingMatch=i;
+  $("m1").value=m.t1;$("m2").value=m.t2;$("mt").value=m.time;$("mv").value=m.venue;$("mr").value=m.round||"";
+  $("mres").value=m.result||"scheduled";$("ms1").value=m.score1||"";$("ms2").value=m.score2||"";
+  $("cancelMatchBtn").style.display="inline-block";document.querySelector('[onclick="saveMatchForm()"]').textContent="Save Match Changes";
+  window.scrollTo({top:document.querySelector("#m1").getBoundingClientRect().top+window.scrollY-100,behavior:"smooth"});
+}
+function cancelMatchEdit(){clearMatchForm()}
+function removeMatch(i){if(confirm("Remove match?")){data.matches.splice(i,1);data.pointsTable=[];save()}}
+function renderPointsEditor(){
+  const groups=data.pointGroups||[];
+  $("pointsEditor").innerHTML=`
+  <div class="form">
+    <label>Group Name<input id="pgName" placeholder="e.g. Group A"></label>
+    <button class="btn green" onclick="addPointGroup()">+ Add Group</button>
+  </div>
+  <div id="pointGroupsAdmin">${groups.map((g,i)=>`
+    <div class="row" style="display:block;margin:12px 0">
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+        <input id="pg_${i}" value="${esc(g.name)}" style="flex:1;min-width:140px">
+        <button class="btn blue" onclick="renamePointGroup(${i})">Save Name</button>
+        <button class="red" onclick="removePointGroup(${i})">Remove Group</button>
+      </div>
+      <div style="margin-top:8px">
+        <b>Teams</b>
+        <div id="teams_${i}" style="margin-top:6px">${(g.teams||[]).map((t,j)=>`<span style="display:inline-flex;align-items:center;gap:4px;background:#e2e8f0;color:#172033;padding:5px 8px;border-radius:7px;margin:3px">${esc(t)} <button onclick="removeGroupTeam(${i},${j})" style="border:0;background:transparent;color:#b91c1c;font-weight:bold">×</button></span>`).join("")}</div>
+        <div style="display:flex;gap:6px;margin-top:7px"><input id="newTeam_${i}" placeholder="Team name"><button class="btn green" onclick="addGroupTeam(${i})">+ Add Team</button></div>
+      </div>
+    </div>`).join("")}</div>
+  <hr><h4>Manual Table Rows</h4>
+  <div id="manualRows"></div>
+  <button class="btn blue" onclick="savePointsTable()">Save Points Table</button>
+  <button class="btn gray" onclick="recalculatePoints()">Recalculate From Results</button>`;
+  renderManualRows();
+}
+function renderManualRows(){
+  const group=getSelectedGroup()||data.pointGroups[0];
+  const rows=(data.pointsTable||[]).filter(x=>!group?.teams?.length||group.teams.includes(x.team));
+  const source=rows.length?rows:buildCalculatedPoints(group);
+  $("manualRows").innerHTML=source.map((x,i)=>`<div class="row" style="flex-wrap:wrap">
+    <b>#${i+1}</b><input data-p="team" value="${esc(x.team)}" placeholder="Team" style="flex:2;min-width:130px">
+    <input data-p="p" value="${esc(x.p)}" placeholder="P" style="width:55px"><input data-p="w" value="${esc(x.w)}" placeholder="W" style="width:55px">
+    <input data-p="l" value="${esc(x.l)}" placeholder="L" style="width:55px"><input data-p="t" value="${esc(x.t)}" placeholder="T" style="width:55px">
+    <input data-p="nr" value="${esc(x.nr)}" placeholder="NR" style="width:55px"><input data-p="pts" value="${esc(x.pts)}" placeholder="Pts" style="width:65px"><input data-p="nrr" value="${esc(x.nrr??"0.00")}" placeholder="NRR" style="width:75px">
+    <button class="red" onclick="this.parentElement.remove()">Remove</button>
+  </div>`).join("");
+}
+function addPointGroup(){
+  const n=$("pgName").value.trim();
+  if(!n)return alert("Enter group name");
+  if(data.pointGroups.some(g=>g.name.toLowerCase()===n.toLowerCase()))return alert("Group already exists");
+  data.pointGroups.push({name:n,teams:[]});save();
+}
+function renamePointGroup(i){
+  const n=$("pg_"+i).value.trim();
+  if(!n)return alert("Group name required");
+  data.pointGroups[i].name=n;save();
+}
+function removePointGroup(i){
+  if(data.pointGroups.length<=1)return alert("At least one group is required");
+  if(confirm("Remove this group?")){data.pointGroups.splice(i,1);save()}
+}
+function addGroupTeam(i){
+  const input=$("newTeam_"+i),n=input.value.trim();
+  if(!n)return;
+  data.pointGroups[i].teams=data.pointGroups[i].teams||[];
+  if(!data.pointGroups[i].teams.includes(n))data.pointGroups[i].teams.push(n);
+  input.value="";save();
+}
+function removeGroupTeam(i,j){
+  data.pointGroups[i].teams.splice(j,1);save();
+}
+function savePointsTable(){
+  const group=getSelectedGroup()||data.pointGroups[0];
+  const rows=[...document.querySelectorAll("#manualRows .row")];
+  const newRows=rows.map(row=>{
+    const get=k=>row.querySelector(`[data-p="${k}"]`)?.value.trim()||"";
+    return {team:get("team"),p:get("p"),w:get("w"),l:get("l"),t:get("t"),nr:get("nr"),pts:get("pts"),nrr:get("nrr"),group:group.name};
+  }).filter(x=>x.team);
+  data.pointsTable=(data.pointsTable||[]).filter(x=>x.group!==group.name && !(group.teams||[]).includes(x.team));
+  data.pointsTable.push(...newRows);save();alert("Points table saved");
+}
+function recalculatePoints(){
+  const group=getSelectedGroup()||data.pointGroups[0];
+  const calculated=buildCalculatedPoints(group).map(x=>({...x,group:group.name}));
+  data.pointsTable=(data.pointsTable||[]).filter(x=>x.group!==group.name && !(group.teams||[]).includes(x.team));
+  data.pointsTable.push(...calculated);save();alert("Points table recalculated from results");
+}
+function saveSquads(){data.squads=$("squadEdit").value.split("\n").filter(Boolean).map(x=>{let a=x.split("|");return{team:a[0].trim(),players:(a[1]||"").split(",").map(p=>p.trim()).filter(Boolean)}});save();alert("Squads saved")}
+function addNews(){let n={title:$("nt").value,date:$("nd").value||"Today",text:$("nx").value,icon:$("ni").value||"🏏"};if(!n.title||!n.text)return alert("Enter title and text");data.news.unshift(n);["nt","nd","nx","ni"].forEach(x=>$(x).value="");save()}
+function removeNews(i){if(confirm("Remove news?")){data.news.splice(i,1);save()}}
+render();
+cloudLoad();
+</script>
+<!-- ICC OFFICIAL Settings -->
+<button class="v6-settings-btn" id="v6SettingsBtn" aria-label="Settings">⚙</button>
+<div class="v6-overlay" id="v6SettingsOverlay">
+  <aside class="v6-settings">
+    <div class="v6-settings-head">
+      <h2>Settings</h2>
+      <button class="v6-close" id="v6CloseSettings" aria-label="Close">×</button>
+    </div>
+
+    <div class="v6-setting-group">
+      <div class="v6-setting-row">
+        <div><strong>Dark Mode</strong><small>Switch the public website between light and dark theme.</small></div>
+        <button class="v6-toggle" id="v6DarkToggle" aria-label="Dark mode"></button>
+      </div>
+      <div class="v6-setting-row">
+        <div><strong>Remember Theme</strong><small>Keep your selected theme after reopening the site.</small></div>
+        <button class="v6-toggle on" id="v6RememberToggle" aria-label="Remember theme"></button>
+      </div>
+    </div>
+
+    <div class="v6-setting-group">
+      <div class="v6-setting-row">
+        <div><strong>Admin Mode</strong><small>Owner-only controls for managing matches, rankings, records and news.</small></div>
+        <button class="v6-toggle" id="v6AdminToggle" aria-label="Admin mode"></button>
+      </div>
+      <div class="v6-admin-box" id="v6AdminBox">
+        <strong>Admin Login</strong>
+        <input id="v6AdminPassword" type="password" placeholder="Enter admin password" autocomplete="off">
+        <button class="v6-action" id="v6AdminLogin">Enable Admin Mode</button>
+        <div class="v6-note" style="margin-top:8px">Admin mode is stored locally in this browser.</div>
+      </div>
+    </div>
+
+    <div class="v6-setting-group">
+      <div class="v6-setting-row">
+        <div><strong>Compact Layout</strong><small>Reduce spacing for a denser mobile-friendly view.</small></div>
+        <button class="v6-toggle" id="v6CompactToggle"></button>
+      </div>
+      <div class="v6-setting-row">
+        <div><strong>Animations</strong><small>Enable or disable small interface transitions.</small></div>
+        <button class="v6-toggle on" id="v6AnimationToggle"></button>
+      </div>
+    </div>
+
+    <div class="v6-setting-group">
+      <strong>Website</strong>
+      <p class="v6-note">ICC OFFICIAL • Cricket news, tournaments, rankings, records and statistics.</p>
+      <p class="v6-note">Tip: Use Admin Mode to access the existing management tools. Public visitors can use the website without logging in.</p>
+    </div>
+  </aside>
+</div>
+
+<script id="v6-settings-script">
+(function(){
+  const body=document.body;
+  const overlay=document.getElementById('v6SettingsOverlay');
+  const openBtn=document.getElementById('v6SettingsBtn');
+  const closeBtn=document.getElementById('v6CloseSettings');
+  const dark=document.getElementById('v6DarkToggle');
+  const remember=document.getElementById('v6RememberToggle');
+  const admin=document.getElementById('v6AdminToggle');
+  const adminBox=document.getElementById('v6AdminBox');
+  const compact=document.getElementById('v6CompactToggle');
+  const animations=document.getElementById('v6AnimationToggle');
+
+  const get=(k,d)=>{try{const v=localStorage.getItem(k);return v===null?d:v}catch(e){return d}};
+  const set=(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}};
+  const on=(el,state)=>{if(el)el.classList.toggle('on',!!state)};
+
+  let darkState=get('iccV6Dark','0')==='1';
+  let rememberState=get('iccV6Remember','1')==='1';
+  let compactState=get('iccV6Compact','0')==='1';
+  let animationState=get('iccV6Animations','1')==='1';
+  let adminState=sessionStorage.getItem('iccV6Admin')==='1';
+
+  function apply(){
+    body.classList.toggle('v6-dark',darkState);
+    body.classList.toggle('v6-compact',compactState);
+    on(dark,darkState); on(remember,rememberState); on(compact,compactState); on(animations,animationState); on(admin,adminState);
+    adminBox.classList.toggle('show',!adminState);
+    if(!animationState) body.style.setProperty('*','transition:none');
+  }
+  apply();
+
+  openBtn.onclick=()=>overlay.classList.add('open');
+  closeBtn.onclick=()=>overlay.classList.remove('open');
+  overlay.addEventListener('click',e=>{if(e.target===overlay)overlay.classList.remove('open')});
+
+  dark.onclick=()=>{darkState=!darkState; if(rememberState)set('iccV6Dark',darkState?'1':'0'); apply()};
+  remember.onclick=()=>{rememberState=!rememberState; set('iccV6Remember',rememberState?'1':'0'); if(rememberState)set('iccV6Dark',darkState?'1':'0'); apply()};
+  compact.onclick=()=>{compactState=!compactState;set('iccV6Compact',compactState?'1':'0');apply()};
+  animations.onclick=()=>{animationState=!animationState;set('iccV6Animations',animationState?'1':'0');apply()};
+
+  document.getElementById('v6AdminLogin').onclick=()=>{
+    const pass=document.getElementById('v6AdminPassword').value;
+    if(pass==='reyan0412'){
+      adminState=true;sessionStorage.setItem('iccV6Admin','1');apply();
+      alert('Admin Mode enabled.');
+    }else{
+      alert('Incorrect admin password.');
+    }
+  };
+  admin.onclick=()=>{
+    if(adminState){
+      adminState=false;sessionStorage.removeItem('iccV6Admin');apply();
+    }else{
+      adminBox.classList.add('show');
+    }
+  };
+})();
+</script>
+
+</body></html>
